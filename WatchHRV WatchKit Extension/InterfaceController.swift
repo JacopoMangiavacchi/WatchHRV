@@ -72,6 +72,67 @@ class InterfaceController: WKInterfaceController {
         hrvLabel.setText("not allowed")
         heartRatelabel.setText("not allowed")
     }
+    
+    @IBAction func startStopSession() {
+        if (self.workoutActive) {
+            self.workoutActive = false
+            self.startStopButton.setTitle("Start")
+            if let workout = self.session {
+                healthStore.end(workout)
+            }
+        } else {
+            self.workoutActive = true
+            self.startStopButton.setTitle("Stop")
+            startWorkout()
+        }
+    }
+    
+    func startWorkout() {
+        guard session == nil else { return }
+        
+        let workoutConfiguration = HKWorkoutConfiguration()
+        workoutConfiguration.activityType = .other
+        
+        do {
+            session = try HKWorkoutSession(configuration: workoutConfiguration)
+            session?.delegate = self
+        } catch {
+        }
+        
+        healthStore.start(self.session!)
+    }
+}
 
 
+extension InterfaceController: HKWorkoutSessionDelegate {
+    func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
+        switch toState {
+        case .running:
+            workoutDidStart(date)
+        case .ended:
+            workoutDidEnd(date)
+        default:
+            break
+        }
+    }
+    
+    func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
+    }
+    
+    
+    func workoutDidStart(_ date : Date) {
+
+    
+    }
+    
+    func workoutDidEnd(_ date : Date) {
+        if let q = self.hrvQuery {
+            healthStore.stop(q)
+        }
+        if let q = self.heartRateQuery {
+            healthStore.stop(q)
+        }
+
+        session = nil
+    }
 }
