@@ -29,6 +29,8 @@ class InterfaceController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.willActivate()
         
+        self.setTitle("WatchHRV")
+        
         guard HKHealthStore.isHealthDataAvailable() == true else {
             displayNotAvailable()
             return
@@ -64,13 +66,13 @@ class InterfaceController: WKInterfaceController {
     }
     
     func displayNotAvailable() {
-        hrvLabel.setText("not available")
-        heartRatelabel.setText("not available")
+        hrvLabel.setText("N/A")
+        heartRatelabel.setText("N/A")
     }
 
     func displayNotAllowed() {
-        hrvLabel.setText("not allowed")
-        heartRatelabel.setText("not allowed")
+        hrvLabel.setText("n/a")
+        heartRatelabel.setText("n/a")
     }
     
     @IBAction func startStopSession() {
