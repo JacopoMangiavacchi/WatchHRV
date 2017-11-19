@@ -103,6 +103,27 @@ class InterfaceController: WKInterfaceController {
         
         healthStore.start(self.session!)
     }
+    
+    func getQuery(date: Date, identifier: HKQuantityTypeIdentifier) -> HKQuery? {
+        guard let quantityType = HKObjectType.quantityType(forIdentifier: identifier) else { return nil }
+        
+        let datePredicate = HKQuery.predicateForSamples(withStart: date, end: nil, options: .strictEndDate )
+        //let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates:[datePredicate])
+        
+        let query = HKAnchoredObjectQuery(type: quantityType, predicate: predicate, anchor: nil, limit: Int(HKObjectQueryNoLimit)) { (query, samples, deletedObjects, newAnchor, error) -> Void in
+            self.processSamples(samples)
+        }
+        
+        query.updateHandler = {(query, samples, deleteObjects, newAnchor, error) -> Void in
+            self.processSamples(samples)
+        }
+        return query
+    }
+    
+    func processSamples(_ samples: [HKSample]?) {
+        
+    }
 }
 
 
@@ -123,8 +144,19 @@ extension InterfaceController: HKWorkoutSessionDelegate {
     
     
     func workoutDidStart(_ date : Date) {
+        if let query = getQuery(date: date, identifier: HKQuantityTypeIdentifier.heartRate) {
+            self.heartRateQuery = query
+            healthStore.execute(query)
+        } else {
+            heartRatelabel.setText("/")
+        }
 
-    
+        if let query = getQuery(date: date, identifier: HKQuantityTypeIdentifier.heartRateVariabilitySDNN) {
+            self.hrvQuery = query
+            healthStore.execute(query)
+        } else {
+            hrvLabel.setText("/")
+        }
     }
     
     func workoutDidEnd(_ date : Date) {
