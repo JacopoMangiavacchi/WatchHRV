@@ -18,6 +18,13 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshControl = UIRefreshControl()
+        tableView.refreshControl = refreshControl
+        
+        refreshControl?.addTarget(self, action: #selector(refreshHRVData(_:)), for: .valueChanged)
+        refreshControl?.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+        refreshControl?.attributedTitle = NSAttributedString(string: "Quering HealthKit ...", attributes: nil)
+        
         guard HKHealthStore.isHealthDataAvailable() == true else {
             print("not available")
             return
@@ -47,7 +54,15 @@ class TableViewController: UITableViewController {
             }
         }
     }
-
+    
+    @objc private func refreshHRVData(_ sender: Any) {
+        hrvData.removeAll()
+        let day = Date(timeIntervalSinceNow: -7*24*60*60)
+        if let query = self.createheartRateVariabilitySDNNStreamingQuery(day) {
+            self.healthStore.execute(query)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -62,6 +77,7 @@ class TableViewController: UITableViewController {
                 guard error == nil, let hrvSamples = samples as? [HKQuantitySample] else {return}
                 
                 self.hrvData.append(contentsOf: hrvSamples)
+                self.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
             })
         }
