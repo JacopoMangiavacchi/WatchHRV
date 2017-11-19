@@ -26,11 +26,11 @@
                                         <label alignment="center" text="HR" textAlignment="center" id="TtG-l0-PfL">
                                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                         </label>
-                                        <label alignment="center" text="-" textAlignment="center" id="IEo-3k-uF0">
-                                            <fontDescription key="font" name="ArialHebrew-Bold" family="Arial Hebrew" pointSize="40"/>
+                                        <label alignment="center" text="-" textAlignment="center" minimumScaleFactor="0.5" id="IEo-3k-uF0">
+                                            <fontDescription key="font" name="ArialHebrew-Bold" family="Arial Hebrew" pointSize="34"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="4" right="0.0" top="12" bottom="0.0"/>
+                                    <edgeInsets key="margins" left="4" right="0.0" top="21" bottom="0.0"/>
                                 </group>
                                 <separator alignment="center" id="ECB-yn-8f8"/>
                                 <group width="0.45000000000000001" height="1" alignment="right" layout="vertical" id="fkT-aM-C4f">
@@ -38,11 +38,11 @@
                                         <label alignment="center" text="HRV" textAlignment="center" id="TbT-QJ-NNR">
                                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                         </label>
-                                        <label alignment="center" text="-" textAlignment="center" id="faD-uM-f8G">
-                                            <fontDescription key="font" name="ArialHebrew-Bold" family="Arial Hebrew" pointSize="40"/>
+                                        <label alignment="center" text="-" textAlignment="center" minimumScaleFactor="0.5" id="faD-uM-f8G">
+                                            <fontDescription key="font" name="ArialHebrew-Bold" family="Arial Hebrew" pointSize="34"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="0.0" right="4" top="12" bottom="0.0"/>
+                                    <edgeInsets key="margins" left="0.0" right="4" top="21" bottom="0.0"/>
                                 </group>
                             </items>
                         </group>
