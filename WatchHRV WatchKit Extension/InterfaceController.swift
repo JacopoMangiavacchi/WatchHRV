@@ -122,7 +122,25 @@ class InterfaceController: WKInterfaceController {
     }
     
     func processSamples(_ samples: [HKSample]?) {
-        
+        guard let heartRateSamples = samples as? [HKQuantitySample] else { return }
+        guard let heartRateQuantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate) else { return }
+        guard let hrvQuantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRateVariabilitySDNN) else { return }
+
+        DispatchQueue.main.async {
+            guard let sample = heartRateSamples.first else { return }
+            switch sample.quantityType {
+            case heartRateQuantityType:
+                let value = sample.quantity.doubleValue(for: self.heartRateUnit)
+                self.heartRatelabel.setText(String(format: "%.1f", value))
+                break
+            case hrvQuantityType:
+                let value = sample.quantity.doubleValue(for: self.hrvUnit)
+                self.hrvLabel.setText(String(format: "%.1f", value))
+                break
+            default:
+                break
+            }
+        }
     }
 }
 
