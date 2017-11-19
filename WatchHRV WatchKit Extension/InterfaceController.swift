@@ -8,24 +8,70 @@
 
 import WatchKit
 import Foundation
+import HealthKit
 
 
 class InterfaceController: WKInterfaceController {
 
+    var authorized = false
+    let healthStore = HKHealthStore()
+    var workoutActive = false
+    var session : HKWorkoutSession?
+    let hrvUnit = HKUnit(from: "ms")
+    let heartRateUnit = HKUnit(from: "count/min")
+    var hrvQuery : HKQuery?
+    var heartRateQuery : HKQuery?
+
+    @IBOutlet private weak var startStopButton : WKInterfaceButton!
+    @IBOutlet private weak var hrvLabel: WKInterfaceLabel!
+    @IBOutlet private weak var heartRatelabel: WKInterfaceLabel!
+
     override func awake(withContext context: Any?) {
-        super.awake(withContext: context)
+        super.willActivate()
         
-        // Configure interface objects here.
+        guard HKHealthStore.isHealthDataAvailable() == true else {
+            displayNotAvailable()
+            return
+        }
+        
+        guard let hrQuantityType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate) else {
+            displayNotAllowed()
+            return
+        }
+        
+        guard let hrvQuantityType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRateVariabilitySDNN) else {
+            displayNotAllowed()
+            return
+        }
+        
+        let dataTypes: Set<HKQuantityType> = [hrQuantityType, hrvQuantityType]
+        healthStore.requestAuthorization(toShare: nil, read: dataTypes) { (success, error) -> Void in
+            if success {
+                self.authorized = true
+            }
+            else {
+                self.displayNotAllowed()
+            }
+        }
     }
     
     override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
         super.willActivate()
     }
     
     override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
+    
+    func displayNotAvailable() {
+        hrvLabel.setText("not available")
+        heartRatelabel.setText("not available")
+    }
+
+    func displayNotAllowed() {
+        hrvLabel.setText("not allowed")
+        heartRatelabel.setText("not allowed")
+    }
+
 
 }

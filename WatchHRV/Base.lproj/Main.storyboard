@@ -48,7 +48,7 @@
                             <outlet property="delegate" destination="stA-OU-U4u" id="GRN-q1-ruQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Heart Rate Variability" id="nD6-XE-RFF"/>
+                    <navigationItem key="navigationItem" title="Heart Rate Variability" prompt="Last 7 days" id="nD6-XE-RFF"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TNy-Bh-qyH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
