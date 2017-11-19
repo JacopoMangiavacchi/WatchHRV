@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7E8737831FC0EAA6008EFC89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8737821FC0EAA6008EFC89 /* AppDelegate.swift */; };
-		7E8737851FC0EAA6008EFC89 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8737841FC0EAA6008EFC89 /* ViewController.swift */; };
 		7E8737881FC0EAA6008EFC89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E8737861FC0EAA6008EFC89 /* Main.storyboard */; };
 		7E87378A1FC0EAA6008EFC89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E8737891FC0EAA6008EFC89 /* Assets.xcassets */; };
 		7E87378D1FC0EAA6008EFC89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E87378B1FC0EAA6008EFC89 /* LaunchScreen.storyboard */; };
@@ -23,6 +22,7 @@
 		7E8737AE1FC0EAA6008EFC89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E8737AD1FC0EAA6008EFC89 /* Assets.xcassets */; };
 		7E8737C11FC0EBD1008EFC89 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8737C01FC0EBD1008EFC89 /* HealthKit.framework */; };
 		7E8737C61FC0EBEF008EFC89 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8737C51FC0EBEF008EFC89 /* HealthKit.framework */; };
+		7E8737C81FC1009E008EFC89 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8737C71FC1009E008EFC89 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +70,6 @@
 /* Begin PBXFileReference section */
 		7E87377F1FC0EAA6008EFC89 /* WatchHRV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchHRV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8737821FC0EAA6008EFC89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7E8737841FC0EAA6008EFC89 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7E8737871FC0EAA6008EFC89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7E8737891FC0EAA6008EFC89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E87378C1FC0EAA6008EFC89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -91,6 +90,7 @@
 		7E8737C01FC0EBD1008EFC89 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		7E8737C21FC0EBE2008EFC89 /* WatchHRV WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchHRV WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		7E8737C51FC0EBEF008EFC89 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS4.1.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		7E8737C71FC1009E008EFC89 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +139,7 @@
 			children = (
 				7E8737BE1FC0EBA7008EFC89 /* WatchHRV.entitlements */,
 				7E8737821FC0EAA6008EFC89 /* AppDelegate.swift */,
-				7E8737841FC0EAA6008EFC89 /* ViewController.swift */,
+				7E8737C71FC1009E008EFC89 /* TableViewController.swift */,
 				7E8737861FC0EAA6008EFC89 /* Main.storyboard */,
 				7E8737891FC0EAA6008EFC89 /* Assets.xcassets */,
 				7E87378B1FC0EAA6008EFC89 /* LaunchScreen.storyboard */,
@@ -333,7 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E8737851FC0EAA6008EFC89 /* ViewController.swift in Sources */,
+				7E8737C81FC1009E008EFC89 /* TableViewController.swift in Sources */,
 				7E8737831FC0EAA6008EFC89 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
