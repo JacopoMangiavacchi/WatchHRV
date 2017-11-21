@@ -14,6 +14,7 @@ class TableViewController: UITableViewController {
     let healthStore = HKHealthStore()
     let hrvUnit = HKUnit(from: "ms")
     var hrvData = [HKQuantitySample]()
+    var query: HKQuery!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +46,8 @@ class TableViewController: UITableViewController {
         healthStore.requestAuthorization(toShare: nil, read: dataTypes) { (success, error) -> Void in
             if success {
                 let day = Date(timeIntervalSinceNow: -7*24*60*60)
-                if let query = self.createheartRateVariabilitySDNNStreamingQuery(day) {
-                    self.healthStore.execute(query)
-                }
+                self.query = self.createheartRateVariabilitySDNNStreamingQuery(day)
+                self.healthStore.execute(self.query)
             }
             else {
                 print("not allowed")
@@ -58,9 +58,8 @@ class TableViewController: UITableViewController {
     @objc private func refreshHRVData(_ sender: Any) {
         hrvData.removeAll()
         let day = Date(timeIntervalSinceNow: -7*24*60*60)
-        if let query = self.createheartRateVariabilitySDNNStreamingQuery(day) {
-            self.healthStore.execute(query)
-        }
+        query = createheartRateVariabilitySDNNStreamingQuery(day)
+        self.healthStore.execute(query)
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,11 +67,11 @@ class TableViewController: UITableViewController {
     }
 
     
-    func createheartRateVariabilitySDNNStreamingQuery(_ startDate: Date) -> HKQuery? {
+    func createheartRateVariabilitySDNNStreamingQuery(_ startDate: Date) -> HKQuery {
         let typeHRV = HKQuantityType.quantityType(forIdentifier: .heartRateVariabilitySDNN)
         let predicate: NSPredicate? = HKQuery.predicateForSamples(withStart: startDate, end: nil, options: HKQueryOptions.strictStartDate)
         
-        let squery = HKSampleQuery(sampleType: typeHRV!, predicate: predicate, limit: 10, sortDescriptors: nil) { (query, samples, error) in
+        let squery = HKSampleQuery(sampleType: typeHRV!, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
             DispatchQueue.main.async(execute: {() -> Void in
                 guard error == nil, let hrvSamples = samples as? [HKQuantitySample] else {return}
                 
