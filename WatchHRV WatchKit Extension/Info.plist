@@ -37,18 +37,24 @@
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>WKAppBundleIdentifier</key>
-			<string>com.jonchui.watchHRV.watchkitapp.watchkitextension</string>
+			<string>com.cherith.watchHRV.watchkitapp</string>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
 	</dict>
 	<key>UIBackgroundModes</key>
 	<array/>
+	<key>WKAppBundleIdentifier</key>
+	<string>com.cherith.watchHRV.watchkitapp</string>
 	<key>WKBackgroundModes</key>
 	<array>
 		<string>workout-processing</string>
 	</array>
 	<key>WKExtensionDelegateClassName</key>
 	<string>$(PRODUCT_MODULE_NAME).ExtensionDelegate</string>
+	<key>WKRunsIndependentlyOfCompanionApp</key>
+	<true/>
+	<key>NSHealthShareUsageDescription</key>
+	<string>testing a description in the watchkit extension so no crashy crasyh</string>
 </dict>
 </plist>
