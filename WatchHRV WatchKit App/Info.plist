@@ -25,9 +25,9 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-	<key>WKCompanionAppBundleIdentifier</key>
-	<string>com.jacopomangiavacchi.WatchHRV</string>
 	<key>WKWatchKitApp</key>
 	<true/>
+	<key>WKCompanionAppBundleIdentifier</key>
+	<string>com.cherith.watchHRV</string>
 </dict>
 </plist>
