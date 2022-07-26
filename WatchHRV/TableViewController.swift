@@ -76,6 +76,7 @@ class TableViewController: UITableViewController {
                 guard error == nil, let hrvSamples = samples as? [HKQuantitySample] else {return}
                 
                 self.hrvData.append(contentsOf: hrvSamples)
+                self.hrvData.reverse();
                 self.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
             })
